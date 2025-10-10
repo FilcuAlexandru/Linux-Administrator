@@ -1,53 +1,56 @@
 # Hardware Monitor
 
-A comprehensive Python script for monitoring hardware on any Linux distribution. Fetches detailed hardware information from `/proc` and `/sys` filesystems and presents it in a clean, organized format.
+A comprehensive Python script for monitoring hardware on any Linux distribution. Fetches detailed hardware information from /proc and /sys filesystems and presents it in a clean, organized format.
 
-## 📋 Features
+## Features
 
-- **Universal Compatibility**: Works on any Linux distribution
-- **Multiple Verbosity Levels**: Choose between basic, detailed, or full hardware information
-- **Smart Status Detection**: Automatically detects critical issues and warnings
-- **Multiple Export Formats**: Export data to JSON, CSV, or LOG files
-- **Colorized Output**: Easy-to-read terminal output with color-coded status indicators
-- **Zero External Dependencies**: Uses only Python standard library
+- Universal Compatibility: Works on any Linux distribution
+- Multiple Verbosity Levels: Choose between basic, detailed, or full hardware information
+- Smart Status Detection: Automatically detects critical issues and warnings
+- Multiple Export Formats: Export data to JSON, CSV, or LOG files
+- Colorized Output: Easy-to-read terminal output with color-coded status indicators
+- Zero External Dependencies: Uses only Python standard library
 
-## 🔧 Hardware Information Collected
+## Hardware Information Collected
 
-| Category | Information |
-|----------|-------------|
-| **System** | Hostname, Kernel, Distribution, Architecture, Uptime, Load Average |
-| **CPU** | Model, Vendor, Cores, Frequency, Cache, Features/Flags |
-| **Memory** | Total/Used/Available RAM, Swap Usage, Active/Inactive Memory |
-| **Motherboard** | Vendor, Model, BIOS Version, Chassis Information |
-| **Storage** | Block Devices, Type (SSD/HDD), Size, Model |
-| **Graphics** | GPU Vendor, Driver Information |
+| Category     | Information                                                        |
+|--------------|--------------------------------------------------------------------|
+| System       | Hostname, Kernel, Distribution, Architecture, Uptime, Load Average |
+| CPU          | Model, Vendor, Cores, Frequency, Cache, Features/Flags             |
+| Memory       | Total/Used/Available RAM, Swap Usage, Active/Inactive Memory       |
+| Motherboard  | Vendor, Model, BIOS Version, Chassis Information                   |
+| Storage      | Block Devices, Type (SSD/HDD), Size, Model                         |
+| Graphics     | GPU Vendor, Driver Information                                     |
 
-## 📦 Requirements
+## Requirements
 
 - Python 3.6 or higher
 - Linux operating system
 - Root/sudo access (for some hardware information)
 
-## 🚀 Installation
+## Installation
 
 1. Download the script:
-```bash
-wget https://example.com/hardware_monitor.py
-# or
-curl -O https://example.com/hardware_monitor.py
-```
+
+   ```bash
+   wget https://example.com/hardware_monitor.py
+   # or
+   curl -O https://example.com/hardware_monitor.py
+   ```
 
 2. Make it executable:
-```bash
-chmod +x hardware_monitor.py
-```
+
+   ```bash
+   chmod +x hardware_monitor.py
+   ```
 
 3. Run it:
-```bash
-./hardware_monitor.py --v
-```
 
-## 💻 Usage
+   ```bash
+   ./hardware_monitor.py --v
+   ```
+
+## Usage
 
 ### Basic Usage
 
@@ -88,9 +91,10 @@ python3 hardware_monitor.py --help
 python3 hardware_monitor.py --version
 ```
 
-## 📊 Verbosity Levels
+## Verbosity Levels
 
-### Level 1: Basic (`--v`)
+### Level 1: Basic (--v)
+
 Essential hardware information including:
 - System overview (hostname, kernel, distribution)
 - CPU model and core count
@@ -99,7 +103,8 @@ Essential hardware information including:
 - Storage devices count
 - Graphics devices count
 
-### Level 2: Detailed (`--vv`)
+### Level 2: Detailed (--vv)
+
 All basic information plus:
 - System uptime and load average
 - CPU frequency and cache size
@@ -108,7 +113,8 @@ All basic information plus:
 - Storage device models
 - GPU driver information
 
-### Level 3: Full (`--vvv`)
+### Level 3: Full (--vvv)
+
 All detailed information plus:
 - Kernel parameters and loaded modules
 - Per-core CPU frequencies
@@ -117,15 +123,28 @@ All detailed information plus:
 - HugePages information
 - Chassis and product serial numbers
 
-## 📁 Export Formats
+## Status Indicators
+
+The script automatically detects and reports status based on thresholds:
+
+| Status   | Color  | Condition                              |
+|----------|--------|----------------------------------------|
+| OK       | Green  | Normal operation                       |
+| WARNING  | Yellow | Usage > 80% or Temperature > 70°C      |
+| CRITICAL | Red    | Usage > 90% or Temperature > 80°C      |
+| UNKNOWN  | Yellow | Information not available              |
+
+## Export Formats
 
 ### JSON Format
+
 Structured data format, ideal for:
 - Integration with other tools
 - Programmatic processing
 - Data analysis
 
 Example:
+
 ```json
 {
   "os": {
@@ -140,12 +159,14 @@ Example:
 ```
 
 ### CSV Format
+
 Comma-separated values, ideal for:
 - Excel/LibreOffice Calc
 - Data analysis
 - Reporting
 
 Format:
+
 ```csv
 Category,Severity,Key,Value
 HardwareInfo,INFO,Hostname,server-01
@@ -153,12 +174,14 @@ HardwareInfo,INFO,Kernel Release,5.15.0-56-generic
 ```
 
 ### LOG Format
+
 Human-readable text format, ideal for:
 - Documentation
 - Audit logs
 - Quick review
 
 Example:
+
 ```
 ======================================================================
 HARDWARE MONITOR - SYSTEM REPORT
@@ -171,13 +194,13 @@ Hostname: server-01
 Kernel Release: 5.15.0-56-generic
 ```
 
-## 🎨 Output Example
+## Output Example
 
 ```
-####################################################################
-#      hardware_monitor.py - A Linux Hardware Monitoring Tool      #  
+######################################################################
+#  HARDWARE MONITOR - Universal Linux Hardware Information Tool    #
 #                          Version 1.0.0                           #
-####################################################################
+######################################################################
 
 Verbosity Level: Basic
 Timestamp: 2025-10-10 14:30:00
@@ -194,64 +217,74 @@ Timestamp: 2025-10-10 14:30:00
 +--------------------+---------------------------+--------+
 ```
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Permission Denied Errors
+
 Some hardware information requires elevated privileges:
+
 ```bash
 sudo python3 hardware_monitor.py --v
 ```
 
 ### No DMI Information Available
+
 This is normal on virtual machines or containers. The script will continue and show available information.
 
 ### Python Version Issues
+
 Ensure you're using Python 3.6 or higher:
+
 ```bash
 python3 --version
 ```
 
-## 📝 Examples
+## Examples
 
 ### Quick System Check
+
 ```bash
 # Quick overview with export
 python3 hardware_monitor.py --v --export-format=log
 ```
 
 ### Detailed Analysis
+
 ```bash
 # Detailed analysis with JSON export for further processing
 python3 hardware_monitor.py --vv --export-format=json --path=./reports
 ```
 
 ### Comprehensive Audit
+
 ```bash
 # Full system audit with all details
 sudo python3 hardware_monitor.py --vvv --export-format=csv --path=/var/log/hardware
 ```
 
 ### Scheduled Monitoring
+
 Add to crontab for regular monitoring:
+
 ```bash
 # Run every day at 2 AM
 0 2 * * * /usr/bin/python3 /path/to/hardware_monitor.py --vv --export-format=json --path=/var/log/hardware
 ```
 
-## 🔍 Use Cases
+## Use Cases
 
-- **System Administration**: Regular hardware monitoring and inventory
-- **Capacity Planning**: Track resource usage over time
-- **Troubleshooting**: Quick hardware diagnostics
-- **Documentation**: Generate hardware reports for compliance
-- **Automation**: Integrate with monitoring systems
-- **Auditing**: Maintain hardware change logs
+- System Administration: Regular hardware monitoring and inventory
+- Capacity Planning: Track resource usage over time
+- Troubleshooting: Quick hardware diagnostics
+- Documentation: Generate hardware reports for compliance
+- Automation: Integrate with monitoring systems
+- Auditing: Maintain hardware change logs
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
@@ -279,21 +312,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 👤 Author
+## Author
 
-**Alexandru Filcu**
+Alexandru Filcu
 
-## 🌟 Support
+## Support
 
 If you find this tool helpful, please consider:
-- ⭐ Starring the repository
-- 🐛 Reporting bugs
-- 💡 Suggesting new features
-- 📖 Improving documentation
+- Starring the repository
+- Reporting bugs
+- Suggesting new features
+- Improving documentation
 
-## 📚 Version History
+## Version History
 
 ### Version 1.0.0 (2025-10-10)
+
 - Initial release
 - Support for OS, CPU, Memory, Motherboard, Storage, and Graphics information
 - Three verbosity levels
@@ -301,6 +335,4 @@ If you find this tool helpful, please consider:
 - Colorized terminal output
 - Smart status detection
 
----
-
-**Note**: This script reads hardware information from system files and requires appropriate permissions. Always review the script before running with elevated privileges.
+Note: This script reads hardware information from system files and requires appropriate permissions. Always review the script before running with elevated privileges.

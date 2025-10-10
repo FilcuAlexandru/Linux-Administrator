@@ -197,10 +197,10 @@ Kernel Release: 5.15.0-56-generic
 ## Output Example
 
 ```
-######################################################################
-#  HARDWARE MONITOR - Universal Linux Hardware Information Tool    #
-#                          Version 1.0.0                           #
-######################################################################
+##################################################################
+#  HARDWARE MONITOR - Universal Linux Hardware Information Tool  #
+#                          Version 1.0.0                         #
+##################################################################
 
 Verbosity Level: Basic
 Timestamp: 2025-10-10 14:30:00
